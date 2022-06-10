@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  mysql:
+    platform: linux/amd64
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=mypassword
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=mypassword
+    restart: always
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "/etc/init.d/mysql", "status"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+  # go-db-app:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   environment:
+  #     - APP_DB_CREDENTIALS=none
+  #   ports:
+  #     - "9999:9999"
+  #   depends_on:
+  #     - mysql
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://localhost:9999/ping"]
+  #     interval: 10s
+  #     timeout: 3s
+  #     retries: 3
+  #     start_period: 5s
