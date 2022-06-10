@@ -7,7 +7,7 @@ COPY go.sum ./
 
 RUN go mod download && go mod verify
 
-COPY app/*.go ./
+COPY pkg/*.go ./
 RUN go build -o .
 
 FROM alpine:latest
