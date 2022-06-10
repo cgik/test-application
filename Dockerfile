@@ -6,7 +6,6 @@ COPY go.mod ./
 COPY go.sum ./
 
 RUN go mod download && go mod verify
-RUN go test
 
 COPY app/*.go .
 RUN go build -o . 
