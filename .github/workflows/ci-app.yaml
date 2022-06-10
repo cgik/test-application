@@ -25,4 +25,4 @@ jobs:
     - name: 'Build and push image'
       run: |
         docker build . -t ghcr.io/cgik/http-reverse:latest
-        docker push --all-tags ghcr.io/cgik/http-reverse:latest
+        docker push ghcr.io/cgik/http-reverse:latest
