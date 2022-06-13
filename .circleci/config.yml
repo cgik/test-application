@@ -7,7 +7,7 @@ executors:
       IMAGE_NAME: ghcr.io/cgik/http-reverse
       GITHUB_NAME: cgik
     docker:
-      - image: cimg/base
+      - image: cimg/base:2022.06-22.04
 
 jobs:
   build:
