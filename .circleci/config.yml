@@ -24,7 +24,7 @@ jobs:
       - run: 
           name: Publish Image
           command: |
-            echo "$GITHUB_TOKEN" | docker login -u "$GITHUB_NAME" --password-stdin
+            echo "$GITHUB_TOKEN" | docker login ghcr.io -u "$GITHUB_NAME" --password-stdin
             docker push $IMAGE_NAME:latest
 
 workflows:
