@@ -3,11 +3,10 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: ghcr.io/cgik/http-reverse:latest
+      - image: http-reverse
         auth:
           username: cgik
           password: $GITHUB_TOKEN
     steps:
-      - run: |
-        docker build . -t ghcr.io/cgik/http-reverse:latest
-        docker push ghcr.io/cgik/http-reverse:latest
+      - run: docker build . -t ghcr.io/cgik/http-reverse:latest
+      - run: docker push ghcr.io/cgik/http-reverse:latest
