@@ -10,12 +10,16 @@ jobs:
   build:
     executor: docker-publisher
     steps:
-      - run: docker build . -t $IMAGE_NAME:latest
-      - run: docker push $IMAGE_NAME:latest
+      - checkout
+      - setup_remote_docker
+      - run: 
+          name: Buuld Docker Image
+          command: docker build . -t $IMAGE_NAME:latest
   
   publish:
     executor: docker-publisher
     steps:
+      - setup_remote_docker
       - run: 
           name: Publish Image
           command: |
