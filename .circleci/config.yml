@@ -1,11 +1,14 @@
 version: 2.1
+
 executors:
+
   docker-publisher:
     environment:
       IMAGE_NAME: ghcr.io/cgik/http-reverse
       GITHUB_NAME: cgik
     docker:
-      - image: circleci/buildpack-deps:stretch
+      - image: cimg/base
+
 jobs:
   build:
     executor: docker-publisher
