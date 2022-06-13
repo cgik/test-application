@@ -1,12 +1,23 @@
 version: 2.1
-
+executors:
+  docker-publisher:
+    environment:
+      IMAGE_NAME: ghcr.io/cgik/http-reverse
+      GITHUB_NAME: cgik
+    docker:
+      - image: circleci/buildpack-deps:stretch
 jobs:
   build:
-    docker:
-      - image: http-reverse
-        auth:
-          username: cgik
-          password: $GITHUB_TOKEN
+    executor: docker-publisher
     steps:
-      - run: docker build . -t ghcr.io/cgik/http-reverse:latest
-      - run: docker push ghcr.io/cgik/http-reverse:latest
+      - run: docker build . -t $IMAGE_NAME:latest
+      - run: docker push $IMAGE_NAME:latest
+  
+  publish:
+    executor: docker-publisher
+    steps:
+      - run: 
+          name: Publish Image
+          command: |
+            docker login -u "$DOCKERHUB_USERNAME" -p "$GITHUB_TOKEN"
+            docker push $IMAGE_NAME:latest
