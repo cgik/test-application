@@ -1,7 +1,5 @@
 version: 2.1
-
 executors:
-
   docker-publisher:
     environment:
       IMAGE_NAME: ghcr.io/cgik/http-reverse
@@ -16,7 +14,7 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: 
-          name: Buuld Docker Image
+          name: Build Image
           command: docker build . -t $IMAGE_NAME:latest
   
   publish:
@@ -28,3 +26,15 @@ jobs:
           command: |
             docker login -u "$DOCKERHUB_USERNAME" -p "$GITHUB_TOKEN"
             docker push $IMAGE_NAME:latest
+
+workflows:
+  version: 2.1
+  build-push:
+    jobs:
+      - build
+      - push:
+        requires:
+          - build
+        filters:
+          branches:
+            only: main
