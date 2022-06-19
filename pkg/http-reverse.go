@@ -15,7 +15,7 @@ type BodyReq struct {
 }
 
 func DatabaseHandler(action string, contents string) {
-	db, err := sql.Open("mysql", "test:mypassword@tcp(127.0.0.1:3306)/test")
+	db, err := sql.Open("mysql", "testuser:mypassword@tcp(127.0.0.1:3306)/testdb")
 	if err != nil {
 		log.Panic(err)
 	}

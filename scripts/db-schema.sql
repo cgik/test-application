@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS Words(
-    WordId          BEGINT NOT NULL,
+    WordId          BIGINT NOT NULL,
     InitWord        VARCHAR(200),
-    RevWord         VARCHAT(200),
+    RevWord         VARCHAR(200),
     PRIMARY KEY(WordId)
 )
