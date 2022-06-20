@@ -10,3 +10,9 @@ up:
 build:
 	cd pkg/; \
 	go build -o server . 
+
+dev: build
+	pkg/server
+
+e2e:
+	tests/e2e-test.sh DIR=$(shell pwd)

@@ -17,13 +17,12 @@ type BodyReq struct {
 func DatabaseHandler(action string, contents string) {
 	db, err := sql.Open("mysql", "testuser:mypassword@tcp(127.0.0.1:3306)/testdb")
 	if err != nil {
-		log.Panic(err)
+		log.Panicf("Unable to connect to db: %v", err)
 	}
 
 	if err := db.Ping(); err != nil {
-		log.Panic(err)
+		log.Panicf("Ping check failed: %v", err)
 	}
-	log.Print("Database Connected")
 
 	defer db.Close()
 }
@@ -65,7 +64,6 @@ func ReadDatabase(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-
 	http.HandleFunc("/call", ReverseHandler)
 	http.HandleFunc("/ping", HealthCheck)
 	http.HandleFunc("/read", ReadDatabase)
